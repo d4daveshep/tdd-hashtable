@@ -33,9 +33,9 @@ def sample_hashtable_1():
 
 
 def test_should_insert_key_value_pairs(sample_hashtable_1):
-    assert sample_hashtable_1["hola"] == "hello"
-    assert sample_hashtable_1[98.6] == 37
-    assert sample_hashtable_1[False] == True
+    assert ("hola","hello") in sample_hashtable_1.pairs
+    assert (98.6, 37) in sample_hashtable_1.pairs
+    assert (False, True) in sample_hashtable_1.pairs
 
 
 def test_should_raise_error_on_missing_key(sample_hashtable_1):
