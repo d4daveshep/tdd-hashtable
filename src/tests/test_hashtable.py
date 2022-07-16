@@ -97,3 +97,9 @@ def test_should_return_key_value_pairs(sample_hashtable_1):
     assert ("hola", "hello") in sample_hashtable_1.pairs
     assert (98.6, 37) in sample_hashtable_1.pairs
     assert (False,True) in sample_hashtable_1.pairs
+
+
+def test_should_not_contain_non_value_when_created():
+    hashtable = HashTable(capacity=100)
+    values = [pair.value for pair in hashtable.pairs if pair]
+    assert None not in values
