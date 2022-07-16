@@ -17,7 +17,7 @@ def test_should_create_empty_value_slots():
     expected_values = [None] * 3
 
     # When
-    actual_values = hashtable.values
+    actual_values = hashtable.pairs
 
     # Then
     assert actual_values == expected_values
@@ -46,13 +46,13 @@ def test_should_raise_error_on_missing_key(sample_hashtable_1):
 
 def test_should_delete_key_value_pair(sample_hashtable_1):
     assert "hola" in sample_hashtable_1
-    assert "hello" in sample_hashtable_1.values
+    assert ("hola", "hello") in sample_hashtable_1.pairs
     assert len(sample_hashtable_1) == 100
 
     del sample_hashtable_1["hola"]
 
     assert "hola" not in sample_hashtable_1
-    assert "hello" not in sample_hashtable_1.values
+    assert ("hola", "hello") not in sample_hashtable_1.pairs
     assert len(sample_hashtable_1) == 100
 
 
@@ -91,3 +91,9 @@ def test_should_raise_error_when_deleting_missing_key(sample_hashtable_1):
     with pytest.raises(KeyError) as exception:
         del sample_hashtable_1["missing_key"]
     assert exception.value.args[0] == "missing_key"
+
+
+def test_should_return_key_value_pairs(sample_hashtable_1):
+    assert ("hola", "hello") in sample_hashtable_1.pairs
+    assert (98.6, 37) in sample_hashtable_1.pairs
+    assert (False,True) in sample_hashtable_1.pairs

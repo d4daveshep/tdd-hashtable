@@ -1,6 +1,6 @@
 class HashTable:
     def __init__(self, capacity):
-        self.values = capacity * [None]
+        self.pairs = capacity * [None]
         self.__capacity = capacity
 
     def __len__(self):
@@ -10,19 +10,17 @@ class HashTable:
         return hash(key) % len(self)
 
     def __setitem__(self, key, value):
-        index = self._index(key)
-        self.values[index] = value
+        self.pairs[self._index(key)] = (key, value)
 
     def __getitem__(self, key):
-        index = self._index(key)
-        value = self.values[index]
-        if value is None:
+        pair = self.pairs[self._index(key)]
+        if pair is None:
             raise KeyError(key)
-        return value
+        return pair[1]
 
     def __delitem__(self, key):
         if key in self:
-            self[key] = None
+            self.pairs[self._index(key)] = None
         else:
             raise KeyError(key)
 
