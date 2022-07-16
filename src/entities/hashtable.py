@@ -13,7 +13,8 @@ class HashTable:
 
     @property
     def pairs(self):
-        return self.__pairs.copy()
+        return [pair for pair in self.__pairs if pair]
+        # return list of non-None pairs
 
     def __len__(self):
         return self.__capacity

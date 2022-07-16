@@ -17,7 +17,8 @@ def test_should_create_empty_value_slots():
     expected_values = [None] * 3
 
     # When
-    actual_values = hashtable.pairs
+    actual_values = hashtable._HashTable__pairs
+    # shouldn't really access the private pairs attribute
 
     # Then
     assert actual_values == expected_values
@@ -107,3 +108,11 @@ def test_should_not_contain_non_value_when_created():
 
 def test_should_return_copy_of_pairs(sample_hashtable_1):
     assert sample_hashtable_1.pairs is not sample_hashtable_1.pairs
+
+def test_should_not_include_blank_pairs(sample_hashtable_1):
+    assert None not in sample_hashtable_1.pairs
+
+def test_should_insert_none_values():
+    hashtable = HashTable(capacity=100)
+    hashtable["key"] = None
+    assert ("key", None) in hashtable.pairs
