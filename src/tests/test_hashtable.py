@@ -103,3 +103,7 @@ def test_should_not_contain_non_value_when_created():
     hashtable = HashTable(capacity=100)
     values = [pair.value for pair in hashtable.pairs if pair]
     assert None not in values
+
+
+def test_should_return_copy_of_pairs(sample_hashtable_1):
+    assert sample_hashtable_1.pairs is not sample_hashtable_1.pairs
