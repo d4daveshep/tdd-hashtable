@@ -9,7 +9,7 @@ def test_should_create_hashtable():
 
 
 def test_should_report_capacity():
-    assert len(HashTable(capacity=100)) == 100
+    assert len(HashTable(capacity=100)) == 0
 
 
 def test_should_create_empty_value_slots():
@@ -39,6 +39,8 @@ def test_should_insert_key_value_pairs(sample_hashtable_1):
     assert (98.6, 37) in sample_hashtable_1.pairs
     assert (False, True) in sample_hashtable_1.pairs
 
+    assert len(sample_hashtable_1) == 3
+
 
 def test_should_raise_error_on_missing_key(sample_hashtable_1):
     with pytest.raises(KeyError) as exception_info:
@@ -49,13 +51,13 @@ def test_should_raise_error_on_missing_key(sample_hashtable_1):
 def test_should_delete_key_value_pair(sample_hashtable_1):
     assert "hola" in sample_hashtable_1
     assert ("hola", "hello") in sample_hashtable_1.pairs
-    assert len(sample_hashtable_1) == 100
+    assert len(sample_hashtable_1) == 3
 
     del sample_hashtable_1["hola"]
 
     assert "hola" not in sample_hashtable_1
     assert ("hola", "hello") not in sample_hashtable_1.pairs
-    assert len(sample_hashtable_1) == 100
+    assert len(sample_hashtable_1) == 2
 
 
 def test_should_raise_error_on_get_deleted_key(sample_hashtable_1):
@@ -151,6 +153,7 @@ def test_should_get_keys_of_empty_hashtable():
 def test_should_return_copy_of_keys(sample_hashtable_1):
     assert sample_hashtable_1.keys is not sample_hashtable_1.keys
 
+
 def test_should_return_pairs(sample_hashtable_1):
     assert sample_hashtable_1.pairs == {
         ("hola", "hello"),
@@ -158,8 +161,10 @@ def test_should_return_pairs(sample_hashtable_1):
         (False, True)
     }
 
+
 def test_should_get_pairs_of_empty_hashtable():
     assert HashTable(capacity=100).pairs == set()
+
 
 def test_should_convert_to_dict(sample_hashtable_1):
     dictionary = dict(sample_hashtable_1.pairs)
@@ -167,3 +172,6 @@ def test_should_convert_to_dict(sample_hashtable_1):
     assert set(dictionary.items()) == sample_hashtable_1.pairs
     assert list(dictionary.values()) == unordered(sample_hashtable_1.values)
 
+
+def test_should_report_length_of_empty_hashtable():
+    assert len(HashTable(capacity=100)) == 0

@@ -25,10 +25,10 @@ class HashTable:
         return {pair.key for pair in self.pairs}
     
     def __len__(self):
-        return self.__capacity
+        return len(self.pairs)
 
     def _index(self, key):
-        return hash(key) % len(self)
+        return hash(key) % len(self.__pairs)
 
     def __setitem__(self, key, value):
         self.__pairs[self._index(key)] = Pair(key, value)
