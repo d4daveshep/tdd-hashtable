@@ -25,12 +25,16 @@ class HashTable:
     @property
     def keys(self):
         return {pair.key for pair in self.pairs}
+
+    @property
+    def capacity(self):
+        return(len(self.__pairs))
     
     def __len__(self):
         return len(self.pairs)
 
     def _index(self, key):
-        return hash(key) % len(self.__pairs)
+        return hash(key) % self.capacity
 
     def __setitem__(self, key, value):
         self.__pairs[self._index(key)] = Pair(key, value)

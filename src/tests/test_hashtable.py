@@ -181,7 +181,20 @@ def test_should_not_create_hashtable_with_zero_capacity():
     with pytest.raises(ValueError):
         HashTable(capacity=0)
 
+
 def test_should_not_create_hashtable_with_negative_capacity():
     with pytest.raises(ValueError):
         HashTable(capacity=-123)
 
+
+def test_should_report_length(sample_hashtable_1):
+    assert len(sample_hashtable_1) == 3
+
+
+def test_should_report_capacity_of_empty_hashtable():
+    assert HashTable(capacity=100).capacity == 100
+
+
+def test_should_report_capacity(sample_hashtable_1):
+    assert sample_hashtable_1.capacity == 100
+   
