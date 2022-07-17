@@ -13,9 +13,17 @@ class HashTable:
 
     @property
     def pairs(self):
-        return [pair for pair in self.__pairs if pair]
+        return {pair for pair in self.__pairs if pair}
         # return list of non-None pairs
 
+    @property
+    def values(self):
+        return [pair.value for pair in self.pairs]
+
+    @property
+    def keys(self):
+        return {pair.key for pair in self.pairs}
+    
     def __len__(self):
         return self.__capacity
 

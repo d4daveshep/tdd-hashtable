@@ -1,4 +1,5 @@
 import pytest
+from pytest_unordered import unordered
 
 from entities.hashtable import HashTable
 
@@ -34,7 +35,7 @@ def sample_hashtable_1():
 
 
 def test_should_insert_key_value_pairs(sample_hashtable_1):
-    assert ("hola","hello") in sample_hashtable_1.pairs
+    assert ("hola", "hello") in sample_hashtable_1.pairs
     assert (98.6, 37) in sample_hashtable_1.pairs
     assert (False, True) in sample_hashtable_1.pairs
 
@@ -97,22 +98,72 @@ def test_should_raise_error_when_deleting_missing_key(sample_hashtable_1):
 def test_should_return_key_value_pairs(sample_hashtable_1):
     assert ("hola", "hello") in sample_hashtable_1.pairs
     assert (98.6, 37) in sample_hashtable_1.pairs
-    assert (False,True) in sample_hashtable_1.pairs
+    assert (False, True) in sample_hashtable_1.pairs
 
 
-def test_should_not_contain_non_value_when_created():
+def test_should_not_contain_none_value_when_created():
     hashtable = HashTable(capacity=100)
-    values = [pair.value for pair in hashtable.pairs if pair]
-    assert None not in values
+    assert None not in hashtable.values
 
 
 def test_should_return_copy_of_pairs(sample_hashtable_1):
     assert sample_hashtable_1.pairs is not sample_hashtable_1.pairs
 
+
 def test_should_not_include_blank_pairs(sample_hashtable_1):
     assert None not in sample_hashtable_1.pairs
+
 
 def test_should_insert_none_values():
     hashtable = HashTable(capacity=100)
     hashtable["key"] = None
     assert ("key", None) in hashtable.pairs
+
+
+def test_should_return_duplicate_values():
+    hashtable = HashTable(capacity=100)
+    hashtable["Alice"] = 24
+    hashtable["Bob"] = 42
+    hashtable["Jeo"] = 42
+    assert [24, 42, 42] == sorted(hashtable.values)
+
+
+def test_should_get_values(sample_hashtable_1):
+    assert unordered(sample_hashtable_1.values) == ["hello", 37, True]
+
+
+def test_should_get_values_of_empty_hashtable():
+    assert HashTable(capacity=100).values == []
+
+
+def test_should_return_copy_of_values(sample_hashtable_1):
+    assert sample_hashtable_1.values is not sample_hashtable_1.values
+
+
+def test_should_get_keys(sample_hashtable_1):
+    assert sample_hashtable_1.keys == {"hola", 98.6, False}
+
+
+def test_should_get_keys_of_empty_hashtable():
+    assert HashTable(capacity=100).keys == set()
+
+
+def test_should_return_copy_of_keys(sample_hashtable_1):
+    assert sample_hashtable_1.keys is not sample_hashtable_1.keys
+
+def test_should_return_pairs(sample_hashtable_1):
+    assert sample_hashtable_1.pairs == {
+        ("hola", "hello"),
+        (98.6, 37),
+        (False, True)
+    }
+
+def test_should_get_pairs_of_empty_hashtable():
+    assert HashTable(capacity=100).pairs == set()
+
+def test_should_convert_to_dict(sample_hashtable_1):
+    dictionary = dict(sample_hashtable_1.pairs)
+    assert set(dictionary.keys()) == sample_hashtable_1.keys
+    assert set(dictionary.items()) == sample_hashtable_1.pairs
+    assert list(dictionary.values()) == unordered(sample_hashtable_1.values)
+
