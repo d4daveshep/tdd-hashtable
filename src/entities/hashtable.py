@@ -8,6 +8,8 @@ class Pair(NamedTuple):
 
 class HashTable:
     def __init__(self, capacity):
+        if capacity < 1:
+            raise ValueError("Capacity must be greater than zero")
         self.__pairs = capacity * [None]
         self.__capacity = capacity
 

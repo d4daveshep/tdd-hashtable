@@ -175,3 +175,13 @@ def test_should_convert_to_dict(sample_hashtable_1):
 
 def test_should_report_length_of_empty_hashtable():
     assert len(HashTable(capacity=100)) == 0
+
+
+def test_should_not_create_hashtable_with_zero_capacity():
+    with pytest.raises(ValueError):
+        HashTable(capacity=0)
+
+def test_should_not_create_hashtable_with_negative_capacity():
+    with pytest.raises(ValueError):
+        HashTable(capacity=-123)
+
