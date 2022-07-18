@@ -76,8 +76,13 @@ class HashTable:
 
     @classmethod
     def from_dict(cls, dictionary, capacity=None):
-        hashtable = cls(capacity or len(dictionary) * 10)
+        hashtable = cls(capacity or len(dictionary) * 10)  # if capacity not specified the use 10 * dict length
         for key, value in dictionary.items():
             hashtable[key] = value
         return hashtable
+
+
+    def __repr__(self):
+        cls = self.__class__.__name__
+        return f"{cls}.from_dict({str(self)})"
 
