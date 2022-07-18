@@ -12,7 +12,7 @@ def test_should_report_capacity():
     assert len(HashTable(capacity=100)) == 0
 
 
-def test_should_create_empty_value_slots():
+def test_should_create_empty_pair_slots():
     # Given
     hashtable = HashTable(capacity=3)
     expected_values = [None] * 3
