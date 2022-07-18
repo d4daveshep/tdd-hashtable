@@ -302,4 +302,3 @@ def test_should_compare_equal_with_different_capacity(dictionary):
     h1 = HashTable.from_dict(dictionary, capacity=50)
     h2 = HashTable.from_dict(dictionary, capacity=100)
     assert h1 == h2
-

@@ -35,7 +35,7 @@ class HashTable:
 
     def __iter__(self):
         yield from self.keys  # delegates the iteration to the keys set
-        
+
     def _index(self, key):
         return hash(key) % self.capacity
 
@@ -81,7 +81,6 @@ class HashTable:
             hashtable[key] = value
         return hashtable
 
-
     def __repr__(self):
         cls = self.__class__.__name__
         return f"{cls}.from_dict({str(self)})"
@@ -95,6 +94,3 @@ class HashTable:
 
     def copy(self):
         return HashTable.from_dict(dict(self.pairs), self.capacity)
-
-
-
