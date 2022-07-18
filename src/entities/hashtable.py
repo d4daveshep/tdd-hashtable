@@ -74,3 +74,10 @@ class HashTable:
             pairs.append(f"{key!r}: {value!r}")
         return "{" + ", ".join(pairs) + "}"
 
+    @classmethod
+    def from_dict(cls, dictionary, capacity=None):
+        hashtable = cls(capacity or len(dictionary) * 10)
+        for key, value in dictionary.items():
+            hashtable[key] = value
+        return hashtable
+

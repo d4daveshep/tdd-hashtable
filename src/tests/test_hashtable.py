@@ -229,3 +229,26 @@ def test_should_use_dict_literal_for_str(sample_hashtable_1):
         "{False: True, 'hola': 'hello', 98.6: 37}",
         "{False: True, 98.6: 37, 'hola': 'hello'}",
     }
+
+@pytest.fixture()
+def dictionary():
+    return {'hola': 'hello', 98.6: 37, False: True}
+
+def test_should_create_hashtable_from_dict(dictionary):
+
+    hashtable = HashTable.from_dict(dictionary)
+
+    assert hashtable.capacity == len(dictionary) * 10
+    assert hashtable.keys == set(dictionary.keys())
+    assert hashtable.pairs == set(dictionary.items())
+    assert unordered(hashtable.values) == list(dictionary.values())
+
+
+def test_should_create_hashtable_from_dict_with_custom_capacity(dictionary):
+
+    hashtable = HashTable.from_dict(dictionary, capacity=100)
+
+    assert hashtable.capacity == 100
+    assert hashtable.keys == set(dictionary.keys())
+    assert hashtable.pairs == set(dictionary.items())
+    assert unordered(hashtable.values) == list(dictionary.values())
