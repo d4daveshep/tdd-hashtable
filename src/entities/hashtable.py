@@ -67,3 +67,10 @@ class HashTable:
             return self[key]
         except KeyError:
             return default
+
+    def __str__(self):
+        pairs = []
+        for key, value in self.pairs:
+            pairs.append(f"{key!r}: {value!r}")
+        return "{" + ", ".join(pairs) + "}"
+
