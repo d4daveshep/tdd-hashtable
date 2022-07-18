@@ -197,4 +197,24 @@ def test_should_report_capacity_of_empty_hashtable():
 
 def test_should_report_capacity(sample_hashtable_1):
     assert sample_hashtable_1.capacity == 100
-   
+
+
+def test_should_iterate_over_keys(sample_hashtable_1):
+    for key in sample_hashtable_1.keys:
+        assert key in ("hola", 98.6, False)
+
+
+def test_should_iterate_over_values(sample_hashtable_1):
+    for value in sample_hashtable_1.values:
+        assert value in ("hello", 37, True)
+
+
+def test_should_iterate_over_pairs(sample_hashtable_1):
+    for key, value in sample_hashtable_1.pairs:
+        assert key in sample_hashtable_1.keys
+        assert value in sample_hashtable_1.values
+
+
+def test_should_iterate_over_instance(sample_hashtable_1):
+    for key in sample_hashtable_1:
+        assert key in ("hola", 98.6, False)

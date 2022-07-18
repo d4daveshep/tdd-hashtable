@@ -28,11 +28,14 @@ class HashTable:
 
     @property
     def capacity(self):
-        return(len(self.__pairs))
-    
+        return len(self.__pairs)
+
     def __len__(self):
         return len(self.pairs)
 
+    def __iter__(self):
+        yield from self.keys  # delegates the iteration to the keys set
+        
     def _index(self, key):
         return hash(key) % self.capacity
 
