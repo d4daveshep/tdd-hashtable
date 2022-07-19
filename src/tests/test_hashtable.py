@@ -1,6 +1,8 @@
+import sys
 import pytest
 from pytest_unordered import unordered
 
+sys.path.append("../")
 from entities.hashtable import HashTable
 
 
